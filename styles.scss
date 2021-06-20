@@ -17,15 +17,37 @@ body{
 }
 
 .tree{
+    $scale_fac: 0.25;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    .head{
+    .crown{
         z-index:3;
         position: relative;
-        background: center/contain no-repeat url(/assets/crown.svg);
-        @include setImageSize(222px,258px,.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .head{
+            background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
+            @include setImageSize(217px,121px,$scale_fac);
+        }
+        .sidepanel.top{
+            @include setImageSize(222px,66px,$scale_fac);
+            background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
+            margin-top: -18px;
+        }
+        .repeat{
+            background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
+            @include setImageSize(222px,0,$scale_fac);
+            height: 40px;
+        }
+        .sidepanel.bottom{
+            @include setImageSize(222px,101px,$scale_fac);
+            background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
+        }
+
     }
     .stem{
         z-index:2;
@@ -34,14 +56,14 @@ body{
         background: #FFA834;
         border-radius: 0 0 4px 4px;
         width: 6px;
-        height: 120px;
+        height: 40px;
     }
     .base{
         z-index:1;
         position: relative;
         margin-top: -20px;
         background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
-        @include setImageSize(301px,194px,.25);
+        @include setImageSize(301px,194px,$scale_fac);
     }
 }
 

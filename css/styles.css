@@ -34,12 +34,48 @@ body {
           flex-direction: column;
 }
 
-.tree .head {
+.tree .crown {
   z-index: 3;
   position: relative;
-  background: center/contain no-repeat url(/assets/crown.svg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.tree .crown .head {
+  background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
+  width: 54.25px;
+  height: 30.25px;
+}
+
+.tree .crown .sidepanel.top {
   width: 55.5px;
-  height: 64.5px;
+  height: 16.5px;
+  background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
+  margin-top: -18px;
+}
+
+.tree .crown .repeat {
+  background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
+  width: 55.5px;
+  height: 0;
+  height: 40px;
+}
+
+.tree .crown .sidepanel.bottom {
+  width: 55.5px;
+  height: 25.25px;
+  background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
 }
 
 .tree .stem {
@@ -49,7 +85,7 @@ body {
   background: #FFA834;
   border-radius: 0 0 4px 4px;
   width: 6px;
-  height: 120px;
+  height: 40px;
 }
 
 .tree .base {
