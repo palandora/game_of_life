@@ -1,1 +1,59 @@
-/* No CSS */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.tree {
+  position: relative;
+}
+
+.tree .head {
+  z-index: 3;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: center/contain no-repeat url(/assets/crown.svg);
+  width: 55.5px;
+  height: 64.5px;
+}
+
+.tree .stem {
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: #FFA834;
+  border-radius: 0 0 4px 4px;
+  width: 6px;
+  height: 20px;
+}
+
+.tree .base {
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 55px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
+  width: 75.25px;
+  height: 48.5px;
+}
