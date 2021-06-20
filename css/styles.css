@@ -19,15 +19,24 @@ body {
 }
 
 .tree {
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .tree .head {
   z-index: 3;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  position: relative;
   background: center/contain no-repeat url(/assets/crown.svg);
   width: 55.5px;
   height: 64.5px;
@@ -35,24 +44,18 @@ body {
 
 .tree .stem {
   z-index: 2;
-  position: absolute;
-  left: 50%;
-  top: 60px;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  position: relative;
+  margin-top: -4px;
   background: #FFA834;
   border-radius: 0 0 4px 4px;
   width: 6px;
-  height: 20px;
+  height: 120px;
 }
 
 .tree .base {
   z-index: 1;
-  position: absolute;
-  left: 50%;
-  top: 55px;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  position: relative;
+  margin-top: -20px;
   background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
   width: 75.25px;
   height: 48.5px;

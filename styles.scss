@@ -17,36 +17,29 @@ body{
 }
 
 .tree{
-    position: relative;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     .head{
         z-index:3;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
         background: center/contain no-repeat url(/assets/crown.svg);
         @include setImageSize(222px,258px,.25);
     }
     .stem{
         z-index:2;
-        position: absolute;
-        left: 50%;
-        top: 60px;
-        transform: translateX(-50%);
+        position: relative;
+        margin-top: -4px;
         background: #FFA834;
         border-radius: 0 0 4px 4px;
         width: 6px;
-        height: 20px;
+        height: 120px;
     }
     .base{
         z-index:1;
-        position: absolute;
-        left: 50%;
-        top: 55px;
-        transform: translateX(-50%);
+        position: relative;
+        margin-top: -20px;
         background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
         @include setImageSize(301px,194px,.25);
     }
