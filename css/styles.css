@@ -52,30 +52,67 @@ body {
           flex-direction: column;
 }
 
-.tree .crown .head {
+.tree .crown.growing .head {
   background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
   width: 54.25px;
   height: 30.25px;
 }
 
-.tree .crown .sidepanel.top {
+.tree .crown.growing .sidepanel.top {
   width: 55.5px;
   height: 16.5px;
   background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
   margin-top: -18px;
 }
 
-.tree .crown .repeat {
+.tree .crown.growing .repeat {
   background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
   width: 55.5px;
   height: 0;
   height: 40px;
 }
 
-.tree .crown .sidepanel.bottom {
+.tree .crown.growing .sidepanel.bottom {
   width: 55.5px;
   height: 25.25px;
   background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
+}
+
+.tree .crown.dead .head {
+  position: relative;
+  background: center/contain no-repeat url(/assets/crowns/dead/top.svg);
+  width: 54px;
+  height: 36px;
+}
+
+.tree .crown.dead .sidepanel.top {
+  margin-top: -32px;
+  width: 57.25px;
+  height: 32.25px;
+  background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_top.svg);
+}
+
+.tree .crown.dead .repeat {
+  background: center/contain repeat-y url(/assets/crowns/dead/repeat.svg);
+  width: 57.25px;
+  height: 0;
+  height: 40px;
+}
+
+.tree .crown.dead .sidepanel.bottom {
+  width: 57.25px;
+  height: 21.25px;
+  background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_bottom.svg);
+}
+
+.tree .crown .apple {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 6.5px;
+  height: 6.5px;
+  background: center/contain repeat-y url(/assets/apple.svg);
 }
 
 .tree .stem {
@@ -92,7 +129,22 @@ body {
   z-index: 1;
   position: relative;
   margin-top: -20px;
-  background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
   width: 75.25px;
   height: 48.5px;
+}
+
+.tree .base.growing {
+  background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
+}
+
+.tree .base.dead {
+  background: center/contain no-repeat url(/assets/base_elements/base_death.svg);
+}
+
+.tree .base.bloom {
+  background: center/contain no-repeat url(/assets/base_elements/base_fruits.svg);
+}
+
+.tree .base.light {
+  background: center/contain no-repeat url(/assets/base_elements/base_light.svg);
 }
