@@ -42,6 +42,7 @@ body{
             .repeat{
                 background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
                 @include setImageSize(222px,0,$scale_fac);
+                transition: height 1s ease-out;
                 height: 40px;
             }
             .sidepanel.bottom{

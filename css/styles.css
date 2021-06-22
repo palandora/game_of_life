@@ -69,6 +69,8 @@ body {
   background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
   width: 55.5px;
   height: 0;
+  -webkit-transition: height 1s ease-out;
+  transition: height 1s ease-out;
   height: 40px;
 }
 
