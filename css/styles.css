@@ -71,7 +71,7 @@ body {
   height: 0;
   -webkit-transition: height 1s ease-out;
   transition: height 1s ease-out;
-  height: 40px;
+  height: 10px;
 }
 
 .tree .crown.growing .sidepanel.bottom {
@@ -98,7 +98,7 @@ body {
   background: center/contain repeat-y url(/assets/crowns/dead/repeat.svg);
   width: 57.25px;
   height: 0;
-  height: 40px;
+  height: 10px;
 }
 
 .tree .crown.dead .sidepanel.bottom {
