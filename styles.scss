@@ -11,9 +11,17 @@
 
 body{
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+}
+
+.grid{
+    border: 1px solid red;
+    position: relative;
+}
+
+.grid_item{
+    position: absolute;
+    border: 1px solid lightgray;
 }
 
 .tree{
@@ -51,6 +59,7 @@ body{
             }
         }
         &.dead{
+            animation: fadeIn 2s forwards cubic-bezier(.73,0,.56,1.67);
             .head{
                 position: relative;
                 background: center/contain no-repeat url(/assets/crowns/dead/top.svg);
@@ -70,6 +79,10 @@ body{
                 @include setImageSize(229px,85px,$scale_fac);
                 background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_bottom.svg);
             }
+            @keyframes fadeIn {
+                0% { opacity: 50%;}
+                100% {opacity: 100%;}
+            }
         }
         .apple{
             content: "";
@@ -78,7 +91,13 @@ body{
             top: 0px;
             @include setImageSize(26px,26px,$scale_fac);
             background: center/contain repeat-y url(/assets/apple.svg);
+            transform-origin: center;
+            animation: grow 2s forwards;
         }  
+        @keyframes grow{
+            from { opacity: 0; transform: scale(0)}
+            to {opacity: 100%; transform: scale(1.25)}
+        }
     }
     .stem{
         z-index:2;
