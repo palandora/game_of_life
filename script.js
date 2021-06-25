@@ -125,10 +125,12 @@ class Grid{
         this.tilesVertical = Math.floor(this.height / 48.5)
         
     }
-    createTiles(){
+    createGrid(){
         const grid = document.querySelector('.grid')
         const tiles = [this.tilesHorizontal*this.tilesVertical]
         const isoPoints = []
+        const offsetX = document.body.clientWidth/2;
+        const offsetY = 0;
 
         for(let y = 0; y < this.tilesHorizontal; y++){
             for(let x = 0; x < this.tilesVertical; x++){
@@ -140,11 +142,10 @@ class Grid{
             }
         }
         isoPoints.forEach(isoPoint => {
-            console.log(isoPoint)
-            isoPoint.drawPt(grid,isoPoint.x,isoPoint.y)
-        })
-        
-        
+            const pointX = isoPoint.x + offsetX
+            const pointY = isoPoint.y + offsetY
+            isoPoint.drawPt(grid,pointX,pointY)
+        }) 
     }
     cartesianToIsometric(cartPt){
         const tempPt = new Point()
@@ -154,13 +155,11 @@ class Grid{
     }
     appendTrees(){
 
-        //instantiate tree objects here and append to reference points
-
     }
 }
 
 const grid = new Grid()
-grid.createTiles()
+grid.createGrid()
 
 
 
