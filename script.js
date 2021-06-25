@@ -53,7 +53,7 @@ class Tree {
             const apples = crown.querySelectorAll('.apple')
             apples.forEach(apple => {
                 crown.removeChild(apple)
-            });
+            })
         }
     }
     grow(){
@@ -96,6 +96,20 @@ class Tree {
     }
   }
 
+class Point{
+    constructor(x,y){
+        this.x = x
+        this.y = y
+    }
+    drawPt(parentNode,x,y){
+        const pt = document.createElement('div')
+        pt.setAttribute('class', 'reference_pt')
+        pt.style.left = x + "px"
+        pt.style.top = y + "px"
+        parentNode.appendChild(pt)
+    }
+}
+
 
 // const myTree = new Tree()
 // myTree.createTree()
@@ -114,34 +128,45 @@ class Grid{
     createTiles(){
         const grid = document.querySelector('.grid')
         const tiles = [this.tilesHorizontal*this.tilesVertical]
-        //alternativlösung-> alle 110 div generieren und container div 
-        //zuweisen -> container div :> disp: flex, wrap
+        const isoPoints = []
 
-        for(let y=0; y< this.tilesVertical;y++){
-            for(let x=0; x< this.tilesHorizontal;x++){
-                const tile = document.createElement('div')
-                tile.setAttribute('class', 'grid_item')
-                tile.style.width = this.tileWidth + "px"
-                tile.style.height = this.tileHeight + "px"
-                tile.style.left = this.tileWidth*x + "px"
-                tile.style.top = this.tileHeight*y  + "px"
-                tiles.push(tile)
+        for(let y = 0; y < this.tilesHorizontal; y++){
+            for(let x = 0; x < this.tilesVertical; x++){
+                const pt = new Point()
+                pt.x = x * this.tileWidth
+                pt.y = y * this.tileWidth
+                let isoPoint = this.cartesianToIsometric(pt)
+                isoPoints.push(isoPoint)
             }
         }
-        tiles.shift()
-        tiles.forEach(tile => {
-            grid.appendChild(tile)
+        isoPoints.forEach(isoPoint => {
+            console.log(isoPoint)
+            isoPoint.drawPt(grid,isoPoint.x,isoPoint.y)
         })
+        
+        
+    }
+    cartesianToIsometric(cartPt){
+        const tempPt = new Point()
+        tempPt.x = cartPt.x - cartPt.y
+        tempPt.y = (cartPt.x + cartPt.y) / 2
+        return (tempPt)
     }
     appendTrees(){
+
+        //instantiate tree objects here and append to reference points
 
     }
 }
 
+const grid = new Grid()
+grid.createTiles()
 
 
-const myGrid = new Grid()
-myGrid.createTiles()
+
+
+
+
 
 
 

@@ -15,14 +15,18 @@ body{
 }
 
 .grid{
-    border: 1px solid red;
     position: relative;
+    height: 100vh;
+    .reference_pt{
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        width: 2px;
+        height: 2px;
+        background: black;
+    }
 }
 
-.grid_item{
-    position: absolute;
-    border: 1px solid lightgray;
-}
 
 .tree{
     $scale_fac: 0.25;

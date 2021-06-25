@@ -11,13 +11,17 @@ body {
 }
 
 .grid {
-  border: 1px solid red;
   position: relative;
+  height: 100vh;
 }
 
-.grid_item {
+.grid .reference_pt {
   position: absolute;
-  border: 1px solid lightgray;
+  top: 40px;
+  left: 40px;
+  width: 2px;
+  height: 2px;
+  background: black;
 }
 
 .tree {
