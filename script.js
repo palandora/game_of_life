@@ -6,10 +6,12 @@ class Tree {
         this.tree
         this.isBlooming = true
     }
-    createTree(){
+    createTree(xCoordinate, yCoordinate){
         const tree = document.createElement('div')
-        tree.setAttribute('class', 'tree')
+        const grid = document.querySelector('.grid')
+        tree.setAttribute('class', 'containerTree')
         tree.innerHTML = `
+        <div class="tree">
             <div class="crown growing">
                 <div class="head"></div>
                 <div class="sidepanel top"></div>
@@ -17,15 +19,44 @@ class Tree {
                 <div class="sidepanel bottom"></div>
             </div>
             <div class="stem"></div>
-            <div class="base growing"></div>`
-        //tbd where to add div element later on  
-        document.body.appendChild(tree)
+            <div class="base default"></div>
+        </div>`
+        tree.style.left = xCoordinate + "px"
+        tree.style.top = yCoordinate + "px"
+        grid.appendChild(tree)
         this.setStem(tree, 120)
+        this.growthSpeed = Math.floor(Math.random() * 40)
         this.tree = tree
     }
     setStem(tree, factor){
         const stem_height = Math.floor(Math.random() * factor)
         tree.querySelector('.stem').style.height = stem_height + "px"
+    }
+    setBase(mode,status){
+        let base = this.tree.querySelector('.base')
+        if(mode == 'regular'){
+            base.classList.remove(`${base.classList[1]}`)
+            switch(status){
+            case "dead":
+                base.classList.add('dead')
+            break
+            case "bloom":
+                base.classList.add('bloom')
+            break
+            }
+        }else if(mode == 'inverted'){
+            switch(status){
+                case "dead":
+                    base.classList.add('dead')
+                break
+                case "bloom":
+                    base.classList.add('bloom')
+                break
+            }
+        }
+        
+
+
     }
     bloom(blooming){
         const appleAmount = 20
@@ -101,65 +132,57 @@ class Point{
         this.x = x
         this.y = y
     }
-    drawPt(parentNode,x,y){
-        const pt = document.createElement('div')
-        pt.setAttribute('class', 'reference_pt')
-        pt.style.left = x + "px"
-        pt.style.top = y + "px"
-        parentNode.appendChild(pt)
-    }
 }
 
 
-// const myTree = new Tree()
-// myTree.createTree()
-// myTree.grow()
-
 class Grid{
     constructor(){
-        this.width = document.body.clientWidth
-        this.height = document.body.clientHeight
-        this.tileWidth = 72.25
-        this.tileHeight = 48.5
-        this.tilesHorizontal = Math.floor(this.width / 72.25)
-        this.tilesVertical = Math.floor(this.height / 48.5)
-        
+        this.tileWidth = 41
+        this.tilesTotal = 8
     }
-    createGrid(){
+    drawScene(){
         const grid = document.querySelector('.grid')
-        const tiles = [this.tilesHorizontal*this.tilesVertical]
+        const tiles = [this.tilesTotal*this.tilesTotal]
+        const tileWidth = 75.25
+        const tileHeight = 48.5
+        const tileOffset = {x: tileWidth/2, y:tileHeight}
         const isoPoints = []
-        const offsetX = document.body.clientWidth/2;
-        const offsetY = 0;
+        const offsetX = document.body.clientWidth/2
+        const offsetY = document.body.clientHeight/2 - 60
 
-        for(let y = 0; y < this.tilesHorizontal; y++){
-            for(let x = 0; x < this.tilesVertical; x++){
+        for(let y = 0; y < this.tilesTotal; y++){
+            for(let x = 0; x < this.tilesTotal; x++){
                 const pt = new Point()
-                pt.x = x * this.tileWidth
-                pt.y = y * this.tileWidth
+                pt.x = x * 38
+                pt.y = y * 38
                 let isoPoint = this.cartesianToIsometric(pt)
+                isoPoint.x += offsetX
+                isoPoint.y += offsetY
                 isoPoints.push(isoPoint)
             }
         }
         isoPoints.forEach(isoPoint => {
-            const pointX = isoPoint.x + offsetX
-            const pointY = isoPoint.y + offsetY
-            isoPoint.drawPt(grid,pointX,pointY)
+            let tree = new Tree()
+            tree.createTree(isoPoint.x-tileOffset.x, isoPoint.y-tileOffset.y)
+            //tree.grow()
         }) 
     }
     cartesianToIsometric(cartPt){
         const tempPt = new Point()
         tempPt.x = cartPt.x - cartPt.y
-        tempPt.y = (cartPt.x + cartPt.y) / 2
+        tempPt.y = (cartPt.x + cartPt.y) / 1.75
         return (tempPt)
-    }
-    appendTrees(){
-
     }
 }
 
 const grid = new Grid()
-grid.createGrid()
+grid.drawScene()
+
+const tree = new Tree()
+tree.createTree()
+tree.setBase('regular','dead')
+
+
 
 
 

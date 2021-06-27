@@ -8,6 +8,7 @@
 body {
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .grid {
@@ -24,7 +25,15 @@ body {
   background: black;
 }
 
-.tree {
+.containerTree {
+  position: absolute;
+  width: 75.25px;
+  height: 48.5px;
+  left: 0;
+  top: 0;
+}
+
+.containerTree .tree {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,9 +47,14 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
-.tree .crown {
+.containerTree .tree .crown {
   z-index: 3;
   position: relative;
   display: -webkit-box;
@@ -58,20 +72,20 @@ body {
           flex-direction: column;
 }
 
-.tree .crown.growing .head {
+.containerTree .tree .crown.growing .head {
   background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
   width: 54.25px;
   height: 30.25px;
 }
 
-.tree .crown.growing .sidepanel.top {
+.containerTree .tree .crown.growing .sidepanel.top {
   width: 55.5px;
   height: 16.5px;
   background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
   margin-top: -18px;
 }
 
-.tree .crown.growing .repeat {
+.containerTree .tree .crown.growing .repeat {
   background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
   width: 55.5px;
   height: 0;
@@ -80,39 +94,39 @@ body {
   height: 10px;
 }
 
-.tree .crown.growing .sidepanel.bottom {
+.containerTree .tree .crown.growing .sidepanel.bottom {
   width: 55.5px;
   height: 25.25px;
   background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
 }
 
-.tree .crown.dead {
+.containerTree .tree .crown.dead {
   -webkit-animation: fadeIn 2s forwards cubic-bezier(0.73, 0, 0.56, 1.67);
           animation: fadeIn 2s forwards cubic-bezier(0.73, 0, 0.56, 1.67);
 }
 
-.tree .crown.dead .head {
+.containerTree .tree .crown.dead .head {
   position: relative;
   background: center/contain no-repeat url(/assets/crowns/dead/top.svg);
   width: 54px;
   height: 36px;
 }
 
-.tree .crown.dead .sidepanel.top {
+.containerTree .tree .crown.dead .sidepanel.top {
   margin-top: -32px;
   width: 57.25px;
   height: 32.25px;
   background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_top.svg);
 }
 
-.tree .crown.dead .repeat {
+.containerTree .tree .crown.dead .repeat {
   background: center/contain repeat-y url(/assets/crowns/dead/repeat.svg);
   width: 57.25px;
   height: 0;
   height: 10px;
 }
 
-.tree .crown.dead .sidepanel.bottom {
+.containerTree .tree .crown.dead .sidepanel.bottom {
   width: 57.25px;
   height: 21.25px;
   background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_bottom.svg);
@@ -136,7 +150,7 @@ body {
   }
 }
 
-.tree .crown .apple {
+.containerTree .tree .crown .apple {
   content: "";
   position: absolute;
   left: 0px;
@@ -176,7 +190,7 @@ body {
   }
 }
 
-.tree .stem {
+.containerTree .tree .stem {
   z-index: 2;
   position: relative;
   margin-top: -4px;
@@ -186,7 +200,7 @@ body {
   height: 40px;
 }
 
-.tree .base {
+.containerTree .tree .base {
   z-index: 1;
   position: relative;
   margin-top: -20px;
@@ -194,18 +208,26 @@ body {
   height: 48.5px;
 }
 
-.tree .base.growing {
+.containerTree .tree .base.default {
   background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
 }
 
-.tree .base.dead {
+.containerTree .tree .base.dead {
   background: center/contain no-repeat url(/assets/base_elements/base_death.svg);
 }
 
-.tree .base.bloom {
+.containerTree .tree .base.bloom {
   background: center/contain no-repeat url(/assets/base_elements/base_fruits.svg);
 }
 
-.tree .base.light {
+.containerTree .tree .base.inverted.default {
   background: center/contain no-repeat url(/assets/base_elements/base_light.svg);
+}
+
+.containerTree .tree .base.inverted.dead {
+  background: center/contain no-repeat url(/assets/base_elements/base_death_light.svg);
+}
+
+.containerTree .tree .base.inverted.bloom {
+  background: center/contain no-repeat url(/assets/base_elements/base_fruits_light.svg);
 }

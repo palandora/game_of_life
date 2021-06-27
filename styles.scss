@@ -12,6 +12,7 @@
 body{
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 .grid{
@@ -27,108 +28,128 @@ body{
     }
 }
 
-
-.tree{
-    $scale_fac: 0.25;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    .crown{
-        z-index:3;
-        position: relative;
+.containerTree{
+    position: absolute;
+    width: 75.25px;
+    height: 48.5px;
+    left: 0;
+    top: 0;
+    .tree{
+        $scale_fac: 0.25;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
-        &.growing{
-            .head{
-                background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
-                @include setImageSize(217px,121px,$scale_fac);
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        .crown{
+            z-index:3;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            &.growing{
+                .head{
+                    background: center/contain no-repeat url(/assets/crowns/growing/top.svg);
+                    @include setImageSize(217px,121px,$scale_fac);
+                }
+                .sidepanel.top{
+                    @include setImageSize(222px,66px,$scale_fac);
+                    background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
+                    margin-top: -18px;
+                }
+                .repeat{
+                    background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
+                    @include setImageSize(222px,0,$scale_fac);
+                    transition: height 1s ease-out;
+                    height: 10px;
+                }
+                .sidepanel.bottom{
+                    @include setImageSize(222px,101px,$scale_fac);
+                    background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
+                }
             }
-            .sidepanel.top{
-                @include setImageSize(222px,66px,$scale_fac);
-                background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_top.svg);
-                margin-top: -18px;
+            &.dead{
+                animation: fadeIn 2s forwards cubic-bezier(.73,0,.56,1.67);
+                .head{
+                    position: relative;
+                    background: center/contain no-repeat url(/assets/crowns/dead/top.svg);
+                    @include setImageSize(216px,144px,$scale_fac);
+                }
+                .sidepanel.top{
+                    margin-top: -32px;
+                    @include setImageSize(229px,129px,$scale_fac);
+                    background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_top.svg);
+                }
+                .repeat{
+                    background: center/contain repeat-y url(/assets/crowns/dead/repeat.svg);
+                    @include setImageSize(229px,0,$scale_fac);
+                    height: 10px;
+                }
+                .sidepanel.bottom{
+                    @include setImageSize(229px,85px,$scale_fac);
+                    background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_bottom.svg);
+                }
+                @keyframes fadeIn {
+                    0% { opacity: 50%;}
+                    100% {opacity: 100%;}
+                }
             }
-            .repeat{
-                background: center/contain repeat-y url(/assets/crowns/growing/repeat.svg);
-                @include setImageSize(222px,0,$scale_fac);
-                transition: height 1s ease-out;
-                height: 10px;
-            }
-            .sidepanel.bottom{
-                @include setImageSize(222px,101px,$scale_fac);
-                background: center/contain no-repeat url(/assets/crowns/growing/sidepanel_bottom.svg);
+            .apple{
+                content: "";
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                @include setImageSize(26px,26px,$scale_fac);
+                background: center/contain repeat-y url(/assets/apple.svg);
+                transform-origin: center;
+                animation: grow 2s forwards;
+            }  
+            @keyframes grow{
+                from { opacity: 0; transform: scale(0)}
+                to {opacity: 100%; transform: scale(1.25)}
             }
         }
-        &.dead{
-            animation: fadeIn 2s forwards cubic-bezier(.73,0,.56,1.67);
-            .head{
-                position: relative;
-                background: center/contain no-repeat url(/assets/crowns/dead/top.svg);
-                @include setImageSize(216px,144px,$scale_fac);
-            }
-            .sidepanel.top{
-                margin-top: -32px;
-                @include setImageSize(229px,129px,$scale_fac);
-                background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_top.svg);
-            }
-            .repeat{
-                background: center/contain repeat-y url(/assets/crowns/dead/repeat.svg);
-                @include setImageSize(229px,0,$scale_fac);
-                height: 10px;
-            }
-            .sidepanel.bottom{
-                @include setImageSize(229px,85px,$scale_fac);
-                background: center/contain no-repeat url(/assets/crowns/dead/sidepanel_bottom.svg);
-            }
-            @keyframes fadeIn {
-                0% { opacity: 50%;}
-                100% {opacity: 100%;}
-            }
+        .stem{
+            z-index:2;
+            position: relative;
+            margin-top: -4px;
+            background: #FFA834;
+            border-radius: 0 0 4px 4px;
+            width: 6px;
+            height: 40px;
         }
-        .apple{
-            content: "";
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            @include setImageSize(26px,26px,$scale_fac);
-            background: center/contain repeat-y url(/assets/apple.svg);
-            transform-origin: center;
-            animation: grow 2s forwards;
-        }  
-        @keyframes grow{
-            from { opacity: 0; transform: scale(0)}
-            to {opacity: 100%; transform: scale(1.25)}
-        }
-    }
-    .stem{
-        z-index:2;
-        position: relative;
-        margin-top: -4px;
-        background: #FFA834;
-        border-radius: 0 0 4px 4px;
-        width: 6px;
-        height: 40px;
-    }
-    .base{
-        z-index:1;
-        position: relative;
-        margin-top: -20px;
-        @include setImageSize(301px,194px,$scale_fac);
-        &.growing{
-            background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
-        }
-        &.dead{
-            background: center/contain no-repeat url(/assets/base_elements/base_death.svg);
-        }
-        &.bloom{
-            background: center/contain no-repeat url(/assets/base_elements/base_fruits.svg);
-        }
-        &.light{
-            background: center/contain no-repeat url(/assets/base_elements/base_light.svg);
+        .base{
+            z-index:1;
+            position: relative;
+            margin-top: -20px;
+            @include setImageSize(301px,194px,$scale_fac);
+            &.default{
+                background: center/contain no-repeat url(/assets/base_elements/base_default.svg);
+            }
+            &.dead{
+                background: center/contain no-repeat url(/assets/base_elements/base_death.svg);
+            }
+            &.bloom{
+                background: center/contain no-repeat url(/assets/base_elements/base_fruits.svg);
+            }
+            &.inverted{
+                &.default{
+                    background: center/contain no-repeat url(/assets/base_elements/base_light.svg);
+                }
+                &.dead{
+                    background: center/contain no-repeat url(/assets/base_elements/base_death_light.svg);
+                }
+                &.bloom{
+                    background: center/contain no-repeat url(/assets/base_elements/base_fruits_light.svg);
+                }
+
+            }
         }
     }
 }
+
 
