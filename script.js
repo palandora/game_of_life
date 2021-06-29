@@ -1,10 +1,13 @@
 class Tree {
     constructor() {
         this.state = "default"
-        this.growthSpeed = 40
+        this.growthSpeed = Math.floor(Math.random() * 32)
         this.age
         this.tree
         this.isBlooming = true
+        this.growthPeriod = Math.floor(Math.random() * (8 - 4 + 1) + 4) * this.growthSpeed
+        this.bloomingPeriod = Math.floor(Math.random() * (20 - 10 + 1) + 10) * this.growthSpeed
+        this.deadPeriod = Math.floor(Math.random() * (30 - 22 + 1) + 22) * this.growthSpeed
     }
     createTree(xCoordinate, yCoordinate){
         const tree = document.createElement('div')
@@ -19,24 +22,25 @@ class Tree {
                 <div class="sidepanel bottom"></div>
             </div>
             <div class="stem"></div>
-            <div class="base default"></div>
+            <div class="base"></div>
         </div>`
         tree.style.left = xCoordinate + "px"
         tree.style.top = yCoordinate + "px"
         grid.appendChild(tree)
-        this.setStem(tree, 120)
-        this.growthSpeed = Math.floor(Math.random() * 40)
         this.tree = tree
+        this.setStem(120)
     }
-    setStem(tree, factor){
+    setStem(factor){
         const stem_height = Math.floor(Math.random() * factor)
-        tree.querySelector('.stem').style.height = stem_height + "px"
+        this.tree.querySelector('.stem').style.height = stem_height + "px"
     }
     setBase(mode,status){
         let base = this.tree.querySelector('.base')
         if(mode == 'regular'){
-            base.classList.remove(`${base.classList[1]}`)
             switch(status){
+            case "default":
+                base.classList.add('default')
+            break
             case "dead":
                 base.classList.add('dead')
             break
@@ -45,7 +49,11 @@ class Tree {
             break
             }
         }else if(mode == 'inverted'){
+            base.classList.add('inverted')
             switch(status){
+                case "default":
+                    base.classList.add('default')
+                break
                 case "dead":
                     base.classList.add('dead')
                 break
@@ -96,19 +104,19 @@ class Tree {
 
         setInterval(function(){
             age+=obj.growthSpeed
-            if(age <= obj.growthSpeed*4){
+            if(age <= obj.growthPeriod){
                 repeat.style.height = 20 + age + "px"
                 obj.state = "growing"
-            }else if(age > obj.growthSpeed*4 && age <= obj.growthSpeed*8){
+            }else if(age > obj.growthPeriod && age <= obj.bloomingPeriod){
                 
                 if(obj.isBlooming){
                     obj.bloom(true)
                     obj.isBlooming = false
                 }
-            }else if(age > obj.growthSpeed*8 && age < obj.growthSpeed*12){
+            }else if(age > obj.bloomingPeriod && age < obj.deadPeriod){
                 crown.classList.remove("growing")
                 crown.classList.add("dead")
-                base.classList.remove("growing")
+                base.classList.remove("default")
                 base.classList.add("dead")
                 obj.state = "dead"
                 obj.bloom(false)
@@ -117,7 +125,7 @@ class Tree {
                 this.state = "rebirth"
                 crown.classList.add("growing")
                 crown.classList.remove("dead")
-                base.classList.add("growing")
+                base.classList.add("default")
                 base.classList.remove("dead")
                 repeat.style.height = 20 + "px"
                 age = 0
@@ -161,10 +169,25 @@ class Grid{
                 isoPoints.push(isoPoint)
             }
         }
+        let inverted = false
+        let counter = 0
         isoPoints.forEach(isoPoint => {
             let tree = new Tree()
             tree.createTree(isoPoint.x-tileOffset.x, isoPoint.y-tileOffset.y)
-            //tree.grow()
+            if(inverted){
+                tree.setBase('inverted','default')
+                counter++
+                inverted=!inverted
+            }else{
+                tree.setBase('regular','default')
+                counter++
+                inverted=!inverted
+            }
+            if(counter==8){
+                inverted=!inverted
+                counter = 0
+            }
+            tree.grow()
         }) 
     }
     cartesianToIsometric(cartPt){
@@ -178,9 +201,6 @@ class Grid{
 const grid = new Grid()
 grid.drawScene()
 
-const tree = new Tree()
-tree.createTree()
-tree.setBase('regular','dead')
 
 
 
