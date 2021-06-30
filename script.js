@@ -62,9 +62,6 @@ class Tree {
                 break
             }
         }
-        
-
-
     }
     bloom(blooming){
         const appleAmount = 20
@@ -142,7 +139,6 @@ class Point{
     }
 }
 
-
 class Grid{
     constructor(){
         this.tileWidth = 41
@@ -194,7 +190,7 @@ class Grid{
         const tempPt = new Point()
         tempPt.x = cartPt.x - cartPt.y
         tempPt.y = (cartPt.x + cartPt.y) / 1.75
-        return (tempPt)
+        return tempPt
     }
 }
 
